@@ -1,3 +1,4 @@
+import Login from "./screens/login"
 
 function App() {
  /**
@@ -5,8 +6,7 @@ function App() {
  */
   return (
     <>
-      <div>
-      </div>
+    <Login/>
     </>
   )
 }

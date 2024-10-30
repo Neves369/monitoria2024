@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  justify-content: center;
 }
 
 h1 {
@@ -53,6 +54,42 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* login */
+.card{
+  display: flex; 
+  height: 100vh;
+  align-items: center; 
+  justify-content: center;
+}
+
+.form{
+  gap: 25px;
+  width: 300px;
+  display: flex; 
+  flex-direction: column; 
+}
+
+.input-div{
+  display: flex;
+}
+
+.button-show-password{
+  flex: 1;
+  display: flex;
+  cursor: pointer; 
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  border: 1px solid transparent;
+  transition: border-color 0.25s;
+}
+
+.button-show-password:hover {
+  border-color: #646cff;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
