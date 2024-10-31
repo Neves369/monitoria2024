@@ -1,39 +1,39 @@
 import { useState } from "react";
-import PropsTypes from "prop-types";
-import { FaEye, FaEyeSlash} from "react-icons/fa";
+import PropTypes from 'prop-types';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const PasswordInput = (props)=>{
-
+/**
+ * Componente de input para senha com opção de visibilidade
+ * @param {Object} props - Propriedades do input de senha
+ */
+const PasswordInput = (props) => {
+    // Controla a visibilidade da senha
     const [visible, setVisible] = useState(false);
 
-    return(
+    return (
         <div className="input-div">
-        <input 
-            style={{flex: 6}}
-            type={visible? 'text':'password'}
-            placeholder={props.placeholder}
-            value={props.value}
-            required={props.required}
-            onChange={(e)=>{props.action(e.target.value)}}
-        />
-        <span  
-            className="button-show-password" 
-            onClick={()=>{setVisible(!visible)}}
-        >
-            {visible? <FaEye/> : <FaEyeSlash/>}
-        </span>
+            {/* Input de senha; troca tipo entre 'password' e 'text' baseado no estado */}
+            <input 
+                {...props}
+                style={{ flex: 6 }}
+                type={visible ? 'text' : 'password'}
+            />
+            {/* Ícone para alternar visibilidade */}
+            <span  
+                className="button-show-password" 
+                onClick={() => setVisible(!visible)}
+            >
+                {visible ? <FaEye /> : <FaEyeSlash />}
+            </span>
         </div>
-    )
+    );
 }
 
-// Este trecho não é necessário, 
-// mas valida o tipo das propriedades recebidas
+// Validação dos tipos esperados das propriedades
 PasswordInput.propTypes = {
-    value: PropsTypes.string.isRequired,
-    placeholder: PropsTypes.string.isRequired,
-    required: PropsTypes.bool,
-    action: PropsTypes.func.isRequired
-}
-// ----------------------------------------------
+    placeholder: PropTypes.string.isRequired,
+    register: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+};
 
 export default PasswordInput;

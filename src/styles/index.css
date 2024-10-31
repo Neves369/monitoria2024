@@ -55,6 +55,11 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.error{
+  color: red;
+  margin-top: -15px;
+}
+
 /* login */
 .card{
   display: flex; 
@@ -64,7 +69,7 @@ button:focus-visible {
 }
 
 .form{
-  gap: 25px;
+  gap: 15px;
   width: 300px;
   display: flex; 
   flex-direction: column; 

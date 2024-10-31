@@ -1,29 +1,22 @@
 import PropTypes from 'prop-types';
 
-// Componente de input customizado
-const CustomInput = (props)=>{
-
-    return(
-        <input 
-            type={props.type} 
-            placeholder={props.placeholder}
-            value={props.value}
-            required={props.required}
-            onChange={(e)=>{props.action(e.target.value)}} 
-            // props.action é o setEmail que é passado no componente pai
-        />
-    )
+/**
+ * Componente de input customizado
+ * @param {Object} props - Propriedades para configurar o input
+ */
+const CustomInput = (props) => {
+    return (
+        // Renderiza um input com todas as propriedades passadas
+        <input {...props} />
+    );
 }
 
-// Este trecho não é necessário, 
-// mas valida o tipo das propriedades recebidas
+// Validação dos tipos das propriedades esperadas para o input
 CustomInput.propTypes = {
     type: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    required: PropTypes.bool.isRequired,
-    action: PropTypes.func.isRequired
-  };
-  // -------------------------------------------------------
+    register: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+};
 
 export default CustomInput;
