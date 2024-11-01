@@ -1,4 +1,7 @@
+import { useContext} from "react";
 import { useForm } from "react-hook-form";
+import AuthContext from "../../context/auth";
+import { useHistory } from "react-router-dom";
 import CustomButton from "../../components/button";
 import CustomInput from "../../components/inputs/CustomInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
@@ -7,6 +10,13 @@ import PasswordInput from "../../components/inputs/PasswordInput";
  * Componente de login que lida com a autenticação do usuário
  */
 const  Login = () => {
+  // o useHistory que permite redirecionar o usuário para outras rotas da aplicação.
+  const history = useHistory(); 
+
+  // Usa o hook useContext para acessar o contexto de autenticação (AuthContext), 
+  // que contém a função signIn.
+  const { signIn } = useContext(AuthContext); 
+
 
   // Inicializa o hook useForm do React Hook Form
   const { 
@@ -21,7 +31,14 @@ const  Login = () => {
    */
   const logar = (data) =>{
 
-    console.log(data);
+    // usuário criado para simulação
+    const usuario = {
+      nome: "Usuário Teste",
+      email: data.email,
+    }
+
+    signIn(usuario);
+    history.push("/dashboard")
     
   }
 
@@ -35,7 +52,7 @@ const  Login = () => {
           type="email"
           placeholder="Email"
           register={ {...register("email", {
-            required: true,
+            // required: true,
           })}}
           
         />
@@ -47,7 +64,7 @@ const  Login = () => {
            name={"senha"}
            placeholder="Senha"
            register={ {...register("senha", {
-            required: true,
+            // required: true,
           })}}
         />
          {/* renderização condicional de erro */}
