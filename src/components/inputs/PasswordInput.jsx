@@ -15,6 +15,9 @@ const PasswordInput = (props) => {
             {/* Input de senha; troca tipo entre 'password' e 'text' baseado no estado */}
             <input 
                 {...props}
+                {...props.register(props.name, {
+                    required: true,
+                  })}
                 style={{ flex: 6 }}
                 type={visible ? 'text' : 'password'}
             />

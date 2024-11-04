@@ -7,7 +7,10 @@ import PropTypes from 'prop-types';
 const CustomInput = (props) => {
     return (
         // Renderiza um input com todas as propriedades passadas
-        <input {...props} />
+        <input {...props}  {...props.register(props.name, {
+            required: true,
+          })}
+        />
     );
 }
 

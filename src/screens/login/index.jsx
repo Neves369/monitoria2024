@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import CustomButton from "../../components/button";
 import CustomInput from "../../components/inputs/CustomInput";
 import PasswordInput from "../../components/inputs/PasswordInput";
+import UsuarioService from "../../services/UsuarioService";
 
 /**
  * Componente de login que lida com a autenticação do usuário
@@ -31,14 +32,22 @@ const  Login = () => {
    */
   const logar = (data) =>{
 
-    // usuário criado para simulação
-    const usuario = {
-      nome: "Usuário Teste",
-      email: data.email,
-    }
+    UsuarioService.login(data)
+    .then((resp) => {
+      if(resp.status == 200){
+        signIn(resp.data[0]);
+        history.push("/dashboard");
+      }
+      else{
+        window.alert("Erro ao realizar login!");
+      }
+    })
+    .catch((e) => {
+      console.log(e);
+      window.alert("Erro: ", e);
+      
+    })
 
-    signIn(usuario);
-    history.push("/dashboard")
     
   }
 
@@ -51,9 +60,7 @@ const  Login = () => {
           name={"email"}
           type="email"
           placeholder="Email"
-          register={ {...register("email", {
-            // required: true,
-          })}}
+          register={register}
           
         />
         {/* renderização condicional de erro */}
@@ -63,9 +70,7 @@ const  Login = () => {
         <PasswordInput
            name={"senha"}
            placeholder="Senha"
-           register={ {...register("senha", {
-            // required: true,
-          })}}
+           register={register}
         />
          {/* renderização condicional de erro */}
         {errors.senha && <p className="error">{"Senha é obrigatória!"}</p>}

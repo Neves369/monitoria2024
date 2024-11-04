@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"; 
+import { createContext, useState, useEffect } from "react"; 
 
 // Cria o contexto de autenticação, 
 // que será utilizado para compartilhar 
@@ -12,10 +12,24 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(undefined);
     const [signedUser, setSignedUser] = useState(false); 
 
+    // UseEffect para recuperar informações do usuário
+    useEffect(() => {
+        function loadStorageData() {
+          const storageUser = sessionStorage.getItem("user");
+          if (storageUser) {
+            setUser(JSON.parse(storageUser));
+            setSignedUser(true);
+          }
+        }
+        loadStorageData();
+      }, []);
+
     // Função que gerencia o login do usuário.
     const signIn = (usuario) => { 
         setUser(usuario);
         setSignedUser(true);
+        // salva o usuário no sessionStorage
+        sessionStorage.setItem("user", JSON.stringify(usuario));
     }
 
     return (
